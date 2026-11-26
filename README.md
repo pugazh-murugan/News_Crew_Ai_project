@@ -3,14 +3,17 @@
 A small [CrewAI](https://docs.crewai.com/) project with two parts:
 
 1. **`news_crew.py`** - a two-agent crew. A *Researcher* searches the web for today's top 3 tech stories, and a *Writer* turns them into a 5-line newsletter.
-2. **`topics/`** - ten short, runnable examples, one per CrewAI topic (workflows, collaboration, process types, tools, memory, knowledge/RAG, ...).
+2. **`app.py`** - a Streamlit customer-support app with a three-agent crew (see below).
+3. **`topics/`** - ten short, runnable examples, one per CrewAI topic (workflows, collaboration, process types, tools, memory, knowledge/RAG, ...).
 
 ## Project structure
 
 ```
 News_Crew_Ai_project/
-├── news_crew.py                    # Main app: Researcher + Writer newsletter crew
-├── requirements.txt                # crewai, crewai-tools, python-dotenv
+├── news_crew.py                    # Researcher + Writer newsletter crew (CLI)
+├── app.py                          # Streamlit customer-support app (3 agents)
+├── answers.txt                     # Created by app.py: saved queries and answers
+├── requirements.txt                # crewai, crewai-tools, python-dotenv, streamlit
 ├── .env.example                    # Template for your API keys (copy to .env)
 ├── .env                            # Your real keys (gitignored, never commit)
 ├── .gitignore / .gitattributes
@@ -64,6 +67,22 @@ python news_crew.py
 ```
 
 Prints the final 5-line newsletter and a self-check of the line count. Needs all three variables above.
+
+## Run the support app
+
+```powershell
+streamlit run app.py
+```
+
+Type a customer query and press Submit. Three agents run in order:
+
+1. **Assistant** answers from the company FAQ (`topics/data/company_faq.txt`, loaded as a knowledge source) and its own knowledge.
+2. **Web Search Assistant** searches the web with `SerperDevTool` and answers from the results.
+3. **Entry Agent** saves the query and both answers to `answers.txt` with a custom `save_to_file` tool.
+
+The page shows both answers and lists the saved history. The sidebar checkbox **Remember earlier queries (memory)** turns on `Crew(memory=True)`. Needs `OPENAI_API_KEY` and `SERPER_API_KEY`; `MODEL` is optional (defaults to `gpt-4o-mini`).
+
+Topics used: multi-step workflow with `context=` (1), sequential process (3), custom Python tool (5), web search tool (6), reading the saved file (7), memory (8), knowledge source (10).
 
 ## Topic examples
 
