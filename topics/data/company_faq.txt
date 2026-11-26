@@ -1,0 +1,17 @@
+Acme Gadgets - Customer FAQ (sample data for the CrewAI examples)
+
+Returns: Items can be returned within 45 days of delivery if unused and in the
+original packaging. Refunds are issued to the original payment method within
+7 business days after the item reaches our warehouse.
+
+Warranty: All Acme devices include a 2-year limited warranty covering
+manufacturing defects. Water damage and accidental drops are not covered.
+
+Shipping: Standard shipping takes 3-5 business days. Express shipping takes
+1-2 business days and costs 12 USD. Orders above 75 USD ship free (standard).
+
+Support hours: Monday to Friday, 9:00 to 18:00 IST. Email support@acme.example.
+Phone support is available only for customers with an active premium plan.
+
+Premium plan: 9 USD per month. Includes priority support, free express
+shipping, and an extended 3-year warranty on new purchases.
